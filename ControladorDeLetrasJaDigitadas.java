@@ -4,7 +4,7 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
 
     public ControladorDeLetrasJaDigitadas ()
     {
-        this.letrasJaDigitadas = null;
+        this.letrasJaDigitadas = "";
         // torna this.letrasJaDigitadas igual ao String vazio
     }
 
@@ -13,9 +13,6 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
         for(int i = 0; i < this.letrasJaDigitadas.length(); i++){
             if (letra == this.letrasJaDigitadas.charAt(i)){
                 return true;
-            }
-            else {
-                return false;
             }
         }
         return false;
@@ -40,13 +37,12 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
 
     public String toString ()
     {
-        String print=null;
+        String print = "";
         for(int i = 0; i < this.letrasJaDigitadas.length(); i++){
             char c = this.letrasJaDigitadas.charAt(i);
             String s = String.valueOf(c);
-            print += String.valueOf(s);
+            print += s;
             print += ", ";
-            
         }
        return print;
 		// retorna um String com TODAS as letras presentes em
@@ -55,13 +51,16 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
 
     public boolean equals (Object obj)
     {
-        if (this.equals(obj)){
-            return true;
-        }else{
-            return false;
-        }
-        
+        if(obj == null) return false;
 
+        if(this==obj) return true;
+
+        if(obj.getClass()!=ControladorDeLetrasJaDigitadas.class) return false;
+
+        ControladorDeLetrasJaDigitadas cont = (ControladorDeLetrasJaDigitadas) obj;
+
+        return this.letrasJaDigitadas == cont.letrasJaDigitadas;
+        
         // verificar se this e obj s�o iguais
     }
 
@@ -77,17 +76,22 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
         // calcular e retornar o hashcode de this
     }
 
-    public ControladorDeLetrasJaDigitadas(
-    ControladorDeLetrasJaDigitadas controladorDeLetrasJaDigitadas)
-    throws Exception // construtor de c�pia
+    public ControladorDeLetrasJaDigitadas(ControladorDeLetrasJaDigitadas c) throws Exception // construtor de c�pia
     {
-
+        if (c == null)  
+            throw new Exception("Objeto inválido!");
+        this.letrasJaDigitadas = c.letrasJaDigitadas;
         // copiar c.letrasJaDigitadas em this.letrasJaDigitadas
     }
 
     public Object clone ()
     {
-        
+        ControladorDeLetrasJaDigitadas ret = null;
+        try{
+            ret= new ControladorDeLetrasJaDigitadas(this);
+        }
+        catch (Exception err){}
+        return ret;
         // criar uma c�pia do this com o construtor de c�pia e retornar
     }
 }

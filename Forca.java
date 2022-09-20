@@ -2,39 +2,40 @@ import java.io.*;
 
 public class Forca
 {
-    public static void main (String args [])
-    {
-        char continuar = ' ';
+	public static void main (String args [])
+	{
+		char continuar = ' ';
 
-        do
-        {
+		do
+		{
 			Palavra palavra =
-			BancoDePalavras.getPalavraSorteada();
-			
+					BancoDePalavras.getPalavraSorteada();
+
 			Tracinhos tracinhos = null;
 			try
 			{
-			    tracinhos = new Tracinhos (palavra.getTamanho());
-            }
-            catch (Exception erro)
-            {}
-            
+				tracinhos = new Tracinhos (palavra.getTamanho());
+			}
+			catch (Exception erro)
+			{}
+
 			ControladorDeLetrasJaDigitadas
-			controladorDeLetrasJaDigitadas =
-			new ControladorDeLetrasJaDigitadas ();
-			
+					controladorDeLetrasJaDigitadas =
+					new ControladorDeLetrasJaDigitadas ();
+
 			ControladorDeErros controladorDeErros = null;
 			try
 			{
-			    controladorDeErros = new ControladorDeErros ((int)(palavra.getTamanho()*0.6));
+				controladorDeErros = new ControladorDeErros ((int)(palavra.getTamanho()*0.6));
 			}
 			catch (Exception erro)
 			{}
 
 			while (tracinhos.isAindaComTracinhos() &&
-				  !controladorDeErros.isAtingidoMaximoDeErros())
+					!controladorDeErros.isAtingidoMaximoDeErros())
 			{
 				System.out.println ("Palavra...: "+tracinhos);
+				System.out.println(palavra);
 				System.out.println ("Digitadas.: "+controladorDeLetrasJaDigitadas);
 				System.out.println ("Erros.....: "+controladorDeErros);
 
@@ -95,6 +96,6 @@ public class Forca
 				}
 			}
 		}
-        while (continuar=='S');
-    }
+		while (continuar=='S');
+	}
 }
