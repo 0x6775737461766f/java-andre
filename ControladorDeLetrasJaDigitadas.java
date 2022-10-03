@@ -59,7 +59,7 @@ public class ControladorDeLetrasJaDigitadas implements Cloneable
 
         ControladorDeLetrasJaDigitadas cont = (ControladorDeLetrasJaDigitadas) obj;
 
-        return this.letrasJaDigitadas == cont.letrasJaDigitadas;
+        return this.letrasJaDigitadas.equals(cont.letrasJaDigitadas);
         
         // verificar se this e obj s�o iguais
     }

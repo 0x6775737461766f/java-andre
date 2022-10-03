@@ -86,5 +86,11 @@ public class TesteControladorDeErros {
         System.out.println ("Eh "+(c7.hashCode()==c9.hashCode())+" que o hashCode de um \"ControladorDeErros\" eh igual ao hashCode de outro \"ControladorDeErros\" com mesma qtdMax");
         // teste 16
         System.out.println ("Eh "+(c7.hashCode()==c8.hashCode())+" que o hashCode de \"ControladorDeErros c7\" eh igual ao hashCode de \"ControladorDeErros c8\"");
+        //teste construtor de copia
+        ControladorDeErros c10 = new ControladorDeErros(c9);
+        System.out.println ("C9 equals C10, que é cons de copia de C9?: "+ c9.equals(c10)+" .ESPERADO: true");
+        //teste clone
+        ControladorDeErros c11 = (ControladorDeErros) c9.clone();
+        System.out.println ("C9 equals C11, que é clone de C9?: "+ c9.equals(c11)+" .ESPERADO: true");
     }
 }
