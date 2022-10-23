@@ -1,6 +1,37 @@
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class TesteControladorDeErros {
-    public static void main (String[] args) throws Exception {
-        // teste 1
+
+    @Test
+    public void testQtdMaximaErrosNaoAtingidaEstado1() throws Exception {
+        //ESTADO 1 - QTD maxima de erros não atingida
+        ControladorDeErros cEstado = new ControladorDeErros(2);
+        try {
+            cEstado.registreUmErro();
+            assertFalse(cEstado.isAtingidoMaximoDeErros());
+        }catch (Exception e){
+            fail();
+        }
+    }
+
+    @Test
+    public void testQtdMaximaErrosAtingidaEstado1() throws Exception {
+        //ESTADO 2 - QTD maxima de erros atingida
+        ControladorDeErros cEstado = new ControladorDeErros(1);
+        cEstado.registreUmErro();
+        try {
+            cEstado.registreUmErro();
+            //test failed
+            fail();
+        }catch (Exception err){
+            assertTrue(cEstado.isAtingidoMaximoDeErros());
+        }
+    }
+
+    @Test
+    public void shouldCreateWithNullParam() {
         try
         {
             ControladorDeErros c1 = new ControladorDeErros (null);
@@ -9,8 +40,12 @@ public class TesteControladorDeErros {
         catch (Exception erro)
         {
             System.err.println ("Deu erro construir ControladorDeErros null");
+            fail();
         }
-        // teste 2
+    }
+
+    @Test
+    public void shouldCreateWithIntParam() {
         try
         {
             ControladorDeErros c2 = new ControladorDeErros (10);
@@ -19,18 +54,27 @@ public class TesteControladorDeErros {
         catch (Exception erro)
         {
             System.err.println ("Deu erro construir ControladoDeErros com qtdMax positiva \"\"");
+            fail();
         }
-        // teste 3
+    }
+
+    @Test
+    public void shouldNotCreateIfQtdMaximaNegative() {
         try
         {
             ControladorDeErros c3 = new ControladorDeErros (-4);
             System.out.println ("Deu certo construir ControladorDeErros com qtdMax negativa \"\"");
+            fail();
         }
         catch (Exception erro)
         {
             System.err.println ("Deu erro construir ControladorDeErros com qtdMax negativa \"\"");
         }
-        // teste 4
+
+    }
+
+    @Test
+    public void shouldCreateBasedOnPalavra() {
         Palavra p1 = null;
         try
         {
@@ -41,10 +85,16 @@ public class TesteControladorDeErros {
         catch (Exception erro)
         {
             System.err.println ("Deu erro construir construir ControladorDeErros da palavra \"JAVA\"");
+            fail();
         }
-        // teste 5
+    }
+
+    @Test
+    public void shouldRegisterErr(){
+        Palavra p1 = null;
         try
         {
+            p1 = new Palavra ("JAVA");
             ControladorDeErros c5 = new ControladorDeErros ((int)(p1.getTamanho()*0.6));
             c5.registreUmErro();
             System.out.println ("Deu certo registrar um erro no ControladorDeErros");
@@ -52,39 +102,48 @@ public class TesteControladorDeErros {
         catch (Exception erro)
         {
             System.err.println ("Deu erro registrar um erro no ControladorDeErros");
+            fail();
         }
-        // teste 6
+    }
+
+    @Test
+    public void shouldNotRegisterMoreErrsThanAllowed() {
         try {
             ControladorDeErros c6 = new ControladorDeErros (1);
             c6.registreUmErro();
             c6.registreUmErro();
             System.out.println ("Deu certo registrar mais erros que o limite no ControladorDeErros c6");
+            fail();
         }
         catch (Exception erro)
         {
             System.err.println ("Deu erro registrar mais erros que o limite no ControladorDeErros c6");
         }
+    }
+
+    @Test
+    public void testMetodosObrigatorios() throws Exception{
         ControladorDeErros c7 = new ControladorDeErros (2);
         ControladorDeErros c9 = new ControladorDeErros (2);
         c7.registreUmErro();
         ControladorDeErros c8 = new ControladorDeErros (5);
-        // teste 8
+        // teste 1
         System.out.println("Testaremos o ControladorDeErros c7 = "+ c7+ ", o ControladorDeErros c8 = " + c8 + " e o Controlador de erros C9 = "+ c9);
-        // teste 8
+        // teste 2
         System.out.println ("\"ControladorDeErros c7\" tem 1 erro registrado, ou seja, "+ c7 +" erros");
-        // teste 10
+        // teste 3
         System.out.println ("Eh "+c7.equals(null)+" que \"ControladorDeErros c7\" eh igual (pelo equals) a null");
-        // teste 11
+        // teste 4
         System.out.println ("Eh "+c7.equals(c7)+" que \"ControladorDeErros c7\" eh igual (pelo equals) a si mesmo");
-        // teste 12
+        // teste 5
         System.out.println ("Eh "+c7.equals("1/2")+" que \"ControladorDeErros c7\" eh igual (pelo equals) ao String \"ControladorDeErros c7\"");
-        // teste 13
+        // teste 6
         System.out.println ("Eh "+c7.equals(c7)+" que \"ControladorDeErros c7\" eh igual (pelo equals) a \"ControladorDeErros c7\"");
-        // teste 14
+        // teste 7
         System.out.println ("Eh "+c7.equals(c8)+" que \"ControladorDeErros c7\" eh igual (pelo equals) a \"ControladorDeErros c8\"");
-        // teste 15
+        // teste 8
         System.out.println ("Eh "+(c7.hashCode()==c9.hashCode())+" que o hashCode de um \"ControladorDeErros\" eh igual ao hashCode de outro \"ControladorDeErros\" com mesma qtdMax");
-        // teste 16
+        // teste 9
         System.out.println ("Eh "+(c7.hashCode()==c8.hashCode())+" que o hashCode de \"ControladorDeErros c7\" eh igual ao hashCode de \"ControladorDeErros c8\"");
         //teste construtor de copia
         ControladorDeErros c10 = new ControladorDeErros(c9);

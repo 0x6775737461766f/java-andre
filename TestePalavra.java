@@ -1,5 +1,6 @@
 class TestePalavra
 {
+    //Nenhum estado foi encontrado
     public static void main (String[] args)
     {
         // teste 1
